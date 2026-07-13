@@ -1,0 +1,12 @@
+oms_dbt_proj:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      user: roger
+      role: ACCOUNTADMIN
+      warehouse: COMPUTE_WH
+      database: SLEEKMART_OMS
+      schema: DBT_JB_DEV 
+      threads: 4
+  
