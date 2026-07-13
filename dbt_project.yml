@@ -47,4 +47,3 @@ models:
       +schema: DBT_JB_DEV
     orders_fact:
       +schema: DBT_JB_DEV
-      
