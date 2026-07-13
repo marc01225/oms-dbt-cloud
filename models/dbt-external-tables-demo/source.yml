@@ -1,7 +1,7 @@
 sources:
   - name: landing
-    database: DEV_OMS
-    schema: LANDING
+    database: SLEEKMART_OMS
+    schema: L1_LANDING
 
     tables:
       - name: customers
@@ -14,16 +14,16 @@ sources:
         identifier: employees
 
   - name: data_lake
-    database: DEV_OMS
-    schema: LANDING
+    database: SLEEKMART_OMS
+    schema: DBT_JB_DEV
 
     tables:
       - name: product_catalog_ext
         description: "External table for static product catalog reference data"
         external:
-          location: "@DEV_OMS.LANDING.data_lake/product/"
+          location: "@SLEEKMART_OMS.L1_LANDING.data_lake/product/"
           pattern: ".*product_catalog.csv"
-          file_format: "DEV_OMS.LANDING.COMMA_DELIMITED"
+          file_format: "SLEEKMART_OMS.L1_LANDING.COMMA_DELIMITED"
           auto_refresh: false
 
         columns:
