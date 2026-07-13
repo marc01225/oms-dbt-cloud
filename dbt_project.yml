@@ -2,12 +2,12 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
-version: '1.0.0'
-config-version: 2
+name: 'oms_dbt_cloud'
+version: '1.1.0'
+config-version: 5
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'default'
+profile: 'oms_dbt_cloud'
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
@@ -36,7 +36,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  oms_dbt_cloud:
+    customers_stg:
+      +schema: DBT_JB_DEV
+    orders_stg:
+      +schema: DBT_JB_DEV
+    orderitems_stg:
+      +schema: DBT_JB_DEV
+    customerrevenue:
+      +schema: DBT_JB_DEV
+    orders_fact:
+      +schema: DBT_JB_DEV
+      
