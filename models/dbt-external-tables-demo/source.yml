@@ -15,13 +15,13 @@ sources:
 
   - name: data_lake
     database: SLEEKMART_OMS
-    schema: DBT_JB_DEV
+    schema: L1_LANDING
 
     tables:
       - name: product_catalog_ext
         description: "External table for static product catalog reference data"
         external:
-          location: "@SLEEKMART_OMS.L1_LANDING.data_lake/product/"
+          location: "@SLEEKMART_OMS.L1_LANDING.PRODUCT_CATALOG_EXT/"
           pattern: ".*product_catalog.csv"
           file_format: "SLEEKMART_OMS.L1_LANDING.COMMA_DELIMITED"
           auto_refresh: false
