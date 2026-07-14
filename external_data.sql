@@ -1,5 +1,7 @@
+-- Create S3 storage integration and stage for OMS data lake
+-- Co-authored with CoCo
 
-    -- Step 1: Create storage integration (ACCOUNTADMIN required)
+-- Step 1: Create storage integration (ACCOUNTADMIN required)
 CREATE OR REPLACE STORAGE INTEGRATION s3_oms_integration
   TYPE = EXTERNAL_STAGE
   STORAGE_PROVIDER = 'S3'
@@ -11,8 +13,18 @@ CREATE OR REPLACE STORAGE INTEGRATION s3_oms_integration
 DESC INTEGRATION s3_oms_integration;
 
 -- Step 3: Create stage using the integration (no credentials needed)
-CREATE OR REPLACE STAGE SLEEKMART_OMS.L1_LANDING.PRODUCT_CATALOG_EXT
+CREATE OR REPLACE STAGE SLEEKMART_OMS.L1_LANDING.data_lake
   URL = 's3://oms-datalake-jb/'
   STORAGE_INTEGRATION = s3_oms_integration;
-  
-LIST @SLEEKMART_OMS.L1_LANDING.PRODUCT_CATALOG_EXT;
+
+LIST @SLEEKMART_OMS.L1_LANDING.data_lake;
+
+CREATE FILE FORMAT IF NOT EXISTS SLEEKMART_OMS.L1_LANDING.product_catalog_ext
+    type = 'csv'
+    field_delimiter = ';'
+    skip_header = 1
+    trim_space = true
+    field_optionally_enclosed_by = '"'
+
+SELECT product_id, product_name, category_name, subcategory_name
+FROM SLEEKMART_OMS.L1_LANDING.PRODUCT_CATALOG_EXT;
