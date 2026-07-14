@@ -1,18 +1,4 @@
 sources:
-  - name: landing
-    database: SLEEKMART_OMS
-    schema: L1_LANDING
-
-    tables:
-      - name: customers
-        identifier: customers
-      - name: orders
-        identifier: orders
-      - name: orderitems
-        identifier: orderitems
-      - name: employees
-        identifier: employees
-
   - name: data_lake
     database: SLEEKMART_OMS
     schema: L1_LANDING
@@ -20,11 +6,7 @@ sources:
     tables:
       - name: product_catalog_ext
         description: "External table for static product catalog reference data"
-        external:
-          location: "@SLEEKMART_OMS.L1_LANDING.data_lake/"
-          pattern: ".*product_catalog.csv"
-          file_format: "SLEEKMART_OMS.L1_LANDING.COMMA_DELIMITED"
-          auto_refresh: false
+        identifier: PRODUCT_CATALOG_EXT
 
         columns:
           - name: product_id
